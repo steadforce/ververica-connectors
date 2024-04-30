@@ -4,11 +4,13 @@ FROM registry.ververica.com/v2.12/flink:1.18.0-stream1-scala_2.12-java11
 # Set environment variables for Hadoop version and download URL
 ENV HADOOP_VERSION=3.3.4
 
+WORKDIR .
+
 # Run commands as root user
 USER root
 
 RUN curl -L https://archive.apache.org/dist/hadoop/common/hadoop-${HADOOP_VERSION}/hadoop-${HADOOP_VERSION}.tar.gz -o hadoop-${HADOOP_VERSION}.tar.gz && \
-    tar -xzvf hadoop-${HADOOP_VERSION}.tar.gz
+    tar xzvf hadoop-${HADOOP_VERSION}.tar.gz
 
 COPY hadoop-${HADOOP_VERSION}/share/hadoop/common/lib/* ../opt/flink/lib/
 COPY hadoop-${HADOOP_VERSION}/share/hadoop/common/hadoop-common-${HADOOP_VERSION}.jar ../opt/flink/lib/
