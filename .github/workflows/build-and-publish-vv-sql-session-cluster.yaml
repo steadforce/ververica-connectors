@@ -1,4 +1,4 @@
-name: Create and publish ververica sql session cluster
+name: Create and publish ververica sql sessioncluster
 
 on:
   push:
