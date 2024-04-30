@@ -1,0 +1,30 @@
+# Use the base Flink image
+FROM registry.ververica.com/v2.12/flink:1.18.0-stream1-scala_2.12-java11
+
+# Set environment variables for Hadoop version and download URL
+ENV HADOOP_VERSION=3.3.4
+
+# Run commands as root user
+USER root
+
+RUN curl -L https://archive.apache.org/dist/hadoop/common/hadoop-${HADOOP_VERSION}/hadoop-${HADOOP_VERSION}.tar.gz -o /tmp/hadoop-${HADOOP_VERSION}.tar.gz
+RUN tar xzf /tmp/hadoop-${HADOOP_VERSION}.tar.gz -C /opt/
+RUN rm /tmp/hadoop-${HADOOP_VERSION}.tar.gz
+
+# Copy necessary Hadoop JAR files into Flink's directory
+COPY /opt/hadoop-3.3.4/share/hadoop/common/lib/* /opt/flink/lib/
+COPY /opt/hadoop-3.3.4/share/hadoop/common/hadoop-common-3.3.4.jar /opt/flink/lib/
+COPY /opt/hadoop-3.3.4/share/hadoop/hdfs/hadoop-hdfs-client-3.3.4.jar /opt/flink/lib/
+COPY /opt/hadoop-3.3.4/share/hadoop/mapreduce/hadoop-mapreduce-client-core-3.3.4.jar /opt/flink/lib/
+
+# See more at https://nightlies.apache.org/flink/flink-docs-master/docs/dev/configuration/advanced/#hadoop-dependencies
+ENV HADOOP_CLASSPATH="/flink/opt/hadoop/*"
+
+# For JAR-based Deployments support
+COPY jars/hadoop-aws-3.3.4.jar ../lib/
+COPY jars/aws-java-sdk-core-1.12.262.jar ../lib/
+COPY jars/aws-java-sdk-s3-1.12.262.jar ../lib/
+COPY jars/aws-java-sdk-dynamodb-1.12.262.jar ../lib/
+COPY jars/joda-time-2.12.7.jar ../lib/
+
+
