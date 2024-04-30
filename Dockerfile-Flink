@@ -26,4 +26,3 @@ COPY jars/aws-java-sdk-dynamodb-1.12.262.jar ../lib/
 COPY jars/joda-time-2.12.7.jar ../lib/
 
 USER flink
-
