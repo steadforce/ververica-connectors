@@ -1,5 +1,7 @@
 FROM registry.ververica.com/v2.12/flink:1.18.0-stream1-scala_2.12-java11
 
+WORKDIR /
+
 # For Flink SQL and VVP SQL Editor support
 COPY jars/hadoop-3.3.4/share/hadoop/common/lib/* ../opt/hadoop/
 COPY jars/hadoop-3.3.4/share/hadoop/common/hadoop-common-3.3.4.jar ../opt/hadoop/
