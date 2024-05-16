@@ -5,7 +5,7 @@ on:
     branches:
     - "**"
     paths:
-      - Dockerfile
+      - Dockerfile-Flink
       - .github/workflows/build-and-publish-vv-sql-session-cluster.yaml
   pull_request:
     branches:
