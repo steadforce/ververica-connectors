@@ -1,4 +1,4 @@
-FROM registry.ververica.com/v2.12/flink:1.18.0-stream1-scala_2.12-java11
+FROM registry.ververica.com/v2.12/flink:1.18.1-stream1-scala_2.12-java8
 
 WORKDIR /
 
