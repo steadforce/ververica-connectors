@@ -58,5 +58,5 @@ jobs:
       with:
         context: .
         push: ${{ github.event_name != 'pull_request' }}
-        tags: ${{ steps.meta.outputs.tags }}
+        tags: ${{ env.REGISTRY }}/steadforce/applications/${{ env.IMAGE_NAME }}:oracle-cdc
         labels: ${{ steps.meta.outputs.labels }}
